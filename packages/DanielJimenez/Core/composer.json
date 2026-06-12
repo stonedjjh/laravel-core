@@ -1,0 +1,15 @@
+{
+    "name": "danieljimenez/core",
+    "description": "Librería core de componentes y arquitectura para Laravel 12.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DanielJimenez\\Core\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0"
+    }
+}
