@@ -19,8 +19,6 @@ Para mantener la rama principal (`main`) 100% estable y lista para producción, 
 
 ## Estructura del Repositorio
 
-## Estructura del Repositorio
-
 ```text
 laravel-core/
 ├── packages/
@@ -29,9 +27,12 @@ laravel-core/
 │           ├── resources/
 │           │   └── views/
 │           │       └── components/   # Componentes Blade/Livewire/Alpine
-│           │           ├── toast/    # Directorio del componente Toast (Ecosistema Visual)
-│           │           │   ├── toast.blade.php
+│           │           ├── layout/   # Directorio del ecosistema de layout compuesto
+│           │           │   ├── index.blade.php
+│           │           │   ├── simple.blade.php
+│           │           │   ├── accordion.blade.php
 │           │           │   └── README.md
+│           │           ├── toast.blade.php              # Inyección y renderizado de notificaciones
 │           │           ├── modal.blade.php              # Componente base estructural de modales
 │           │           ├── modal-confirmation.blade.php # Servicio global asíncrono de confirmación
 │           │           └── loading-container.blade.php  # Wrapper de control de estados de carga
