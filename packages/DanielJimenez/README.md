@@ -108,21 +108,9 @@ Asegúrate de incluir las directivas de Vite junto con los estilos y scripts obl
     <body class="bg-surface text-on-surface dark:bg-surface-dark dark:text-on-surface-dark">
     
         @livewireScripts
-    </body>
-    ```
-
-2. **Carga en la Plantilla Maestra:**
-   Asegúrate de incluir las directivas de Vite junto con los estilos y scripts obligatorios de Livewire dentro del bloque `<head>` de tus layouts principales:
-   ```html
-   <head>
-       @vite(['resources/css/app.css', 'resources/js/app.js'])
-       @livewireStyles
-   </head>
-   <body>
-       @livewireScripts
-   </body>
-   ```
-
+    </body>   
+```    
+    
 ## 3. Ecosistema de Componentes de Infraestructura Global
 
 La librería incluye componentes de servicio único que deben instanciarse una sola vez dentro del Layout Maestro (`layouts/app.blade.php`) para quedar disponibles globalmente en toda la aplicación.
@@ -142,3 +130,19 @@ Intercepta flujos críticos (como eliminaciones o estados de peligro) abriendo u
        @livewireScripts
    </body>
    ```
+
+## 4. Control de Estados de Carga (`<x-core::loading-container />`)
+
+Wrapper estructural atómico diseñado para interceptar peticiones asíncronas de Livewire. Controla automáticamente la opacidad visual y aplica `pointer-events-none` en el cliente para prevenir duplicaciones de clicks en acciones críticas.
+
+### Propiedades (`@props`)
+* **`target`** *(string, por defecto: `'save'`)*: Nombre del método o acción en el componente de Livewire que activará el estado de bloqueo visual.
+
+### Ejemplo de Uso en Formularios
+```html
+<x-core::loading-container target="guardarUsuario">
+    <form wire:submit="guardarUsuario" class="space-y-3">
+        <button type="submit">Guardar Registro</button>
+    </form>
+</x-core::loading-container>
+```
