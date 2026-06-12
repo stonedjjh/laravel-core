@@ -41,6 +41,6 @@
 
     <x-core::modal-confirmation />
 
-    @livewireScripts
+    @livewireScriptConfig
 </body>
 </html>

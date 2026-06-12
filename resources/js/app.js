@@ -1,7 +1,9 @@
 import './bootstrap';
-import Alpine from 'alpinejs'
-import collapse from '@alpinejs/collapse'
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import collapse from '@alpinejs/collapse';
 
-Alpine.plugin(collapse)
-window.Alpine = Alpine
-Alpine.start()
+// 1. Registrar el plugin en la instancia compartida antes del inicio
+Alpine.plugin(collapse);
+
+// 2. Arrancar la instancia única oficial
+Livewire.start();
