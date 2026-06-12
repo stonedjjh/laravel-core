@@ -16,12 +16,14 @@ x-on:toast.window="
 ```
 
 ### Tipos de Alerta Soportados (`type`)
-El componente mapea de forma automática la opacidad de los contenedores, el color de la barra inferior, el texto y los iconos utilizando los tokens semánticos definidos en tu archivo de estilos global:
+El componente delega el mapeo de la opacidad de los contenedores, el color de la barra inferior, el texto y los botones de acción a la clase helper arquitectónica `DanielJimenez\Core\Helpers\CoreStyle::all()`. Esto centraliza el diseño semántico inyectando el diccionario completo a Alpine.js mediante `@js`.
+
+Soporta los siguientes tipos de alerta:
 * `success` (Éxito - Verde)
 * `danger` / `error` (Fallas/Errores - Rojo)
 * `warning` (Advertencias - Amarillo/Naranja)
 * `info` (Información - Azul)
-
+* `normal` (Neutro - Escala de grises adaptativa para componentes estándar)
 ---
 
 ## 2. Casos de Uso e Implementación
@@ -86,7 +88,7 @@ Cuando se emita el evento desde cualquier origen, el objeto `detail` debe cumpli
 
 | Propiedad | Tipo | Obligatorio | Descripción |
 | :--- | :--- | :--- | :--- |
-| `type` | String | Sí | Define el esquema visual: `success`, `danger`, `error`, `warning`, `info`. |
+| `type` | String | Sí | Define el esquema visual consumiendo el helper CoreStyle: `success`, `danger`, `error`, `warning`, `info`, `normal`. |
 | `title` | String | No | Encabezado principal en negrita de la notificación. |
 | `message` | String | No | Cuerpo del texto descriptivo con ajuste automático de línea (`text-pretty`). |
 

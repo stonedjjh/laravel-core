@@ -88,23 +88,30 @@ Ejecuta el siguiente comando en la raíz de la aplicación principal para integr
 composer require livewire/livewire
 ```
 
-### Requisito B: Instalar e Iniciar Alpine.js (Frontend)
+### Requisito B: Configurar el Bundle Principal (Frontend)
 
-1. **Instalar la Dependencia de Node:**
-   Ejecuta el comando en la raíz del proyecto para agregar Alpine mediante npm:
+Livewire gestiona e inicializa de forma nativa e interna su propia copia de Alpine.js. Para evitar colisiones de reactividad o inicializaciones duplicadas en el DOM, el archivo de JavaScript principal de tu aplicación `(resources/js/app.js)` debe mantenerse limpio y estándar, delegando la carga al ciclo de vida del framework:
+
    ```bash
-   npm install alpinejs
+   import './bootstrap';
    ```
 
-2. **Configurar el Bundle Principal:**
-   Abre el archivo de JavaScript principal de tu aplicación (`resources/js/app.js`) e inyecta las directivas de inicialización globales:
-   ```javascript
-    document.addEventListener('livewire:init', () => {
-        window.Alpine = Livewire.Alpine;
-    });
-   ```
+### Requisito C: Carga en la Plantilla Maestra
 
-3. **Carga en la Plantilla Maestra:**
+Asegúrate de incluir las directivas de Vite junto con los estilos y scripts obligatorios de Livewire dentro de tus layouts principales. Las directivas de scripts deben colocarse al final del cuerpo para garantizar el correcto emparejamiento de los componentes:
+
+   ```HTML
+   <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    </head>
+    <body class="bg-surface text-on-surface dark:bg-surface-dark dark:text-on-surface-dark">
+    
+        @livewireScripts
+    </body>
+    ```
+
+2. **Carga en la Plantilla Maestra:**
    Asegúrate de incluir las directivas de Vite junto con los estilos y scripts obligatorios de Livewire dentro del bloque `<head>` de tus layouts principales:
    ```html
    <head>
@@ -112,6 +119,26 @@ composer require livewire/livewire
        @livewireStyles
    </head>
    <body>
+       @livewireScripts
+   </body>
+   ```
+
+## 3. Ecosistema de Componentes de Infraestructura Global
+
+La librería incluye componentes de servicio único que deben instanciarse una sola vez dentro del Layout Maestro (`layouts/app.blade.php`) para quedar disponibles globalmente en toda la aplicación.
+
+### Sistema de Notificaciones (`<x-core::toast />`)
+
+Gestiona alertas flotantes dinámicas despachadas desde componentes de Livewire o mediante eventos del navegador.
+
+### Servicio de Confirmación Global (`<x-core::modal-confirmation />`)
+
+Intercepta flujos críticos (como eliminaciones o estados de peligro) abriendo un diálogo de advertencia asíncrono que devuelve el control al backend de manera segura.
+
+   ```HTML
+       <x-core::toast />
+       <x-core::modal-confirmation />
+   
        @livewireScripts
    </body>
    ```

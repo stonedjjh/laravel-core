@@ -18,13 +18,7 @@
         },
 
         get style() {
-            const map = {
-                success: { container: 'bg-success/10', bar: 'bg-success', icon: 'bg-success/15 text-success', text: 'text-success' },
-                danger:  { container: 'bg-danger/10',  bar: 'bg-danger',  icon: 'bg-danger/15 text-danger',   text: 'text-danger' },
-                error:   { container: 'bg-danger/10',  bar: 'bg-danger',  icon: 'bg-danger/15 text-danger',   text: 'text-danger' },
-                info:    { container: 'bg-info/10',    bar: 'bg-info',    icon: 'bg-info/15 text-info',       text: 'text-info' },
-                warning: { container: 'bg-warning/10', bar: 'bg-warning', icon: 'bg-warning/15 text-warning', text: 'text-warning' }
-            };
+            const map = @js(\DanielJimenez\Core\Helpers\CoreStyle::all());
             return map[this.notification.type] || map.success;
         },
 

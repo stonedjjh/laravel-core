@@ -29,10 +29,17 @@
             >
                 Lanzar Toast de Error
             </button>
+
+            <div class="pt-2 border-t border-stone-100 dark:border-stone-800">
+                {{-- Inyección limpia del componente reactivo --}}
+                <livewire:prueba-modal />
+            </div>        
         </div>
+
+        <x-core::toast />
     </div>
 
-    <x-core::toast />
+    <x-core::modal-confirmation />
 
     @livewireScripts
 </body>
